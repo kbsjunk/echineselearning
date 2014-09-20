@@ -65,7 +65,7 @@
 
 						<label for="lesson_date" class="control-label">{{{ trans('kitbs/echineselearning::lessons/form.lesson_date') }}} <i class="fa fa-info-circle" data-toggle="popover" data-content="{{{ trans('kitbs/echineselearning::lessons/form.lesson_date_help') }}}"></i></label>
 
-						<input type="date" class="form-control" name="lesson_date" id="lesson_date" placeholder="{{{ trans('kitbs/echineselearning::lessons/form.lesson_at') }}}" value="{{{ Input::old('lesson_date', $lesson->lesson_at->format('Y-m-d')) }}}">
+						<input type="date" class="form-control" name="lesson_date" id="lesson_date" placeholder="{{{ trans('kitbs/echineselearning::lessons/form.lesson_at') }}}" value="{{{ Input::old('lesson_date', $lesson->exists ? $lesson->lesson_at->format('Y-m-d') : null) }}}">
 
 						<span class="help-block">{{{ $errors->first('lesson_date', ':message') }}}</span>
 
@@ -79,7 +79,7 @@
 
 						<label for="lesson_time" class="control-label">{{{ trans('kitbs/echineselearning::lessons/form.lesson_time') }}} <i class="fa fa-info-circle" data-toggle="popover" data-content="{{{ trans('kitbs/echineselearning::lessons/form.lesson_time_help') }}}"></i></label>
 
-						<input type="time" class="form-control" name="lesson_time" id="lesson_time" placeholder="{{{ trans('kitbs/echineselearning::lessons/form.lesson_at') }}}" value="{{{ Input::old('lesson_time', $lesson->lesson_at->format('H:i')) }}}">
+						<input type="time" class="form-control" name="lesson_time" id="lesson_time" placeholder="{{{ trans('kitbs/echineselearning::lessons/form.lesson_at') }}}" value="{{{ Input::old('lesson_time', $lesson->exists ? $lesson->lesson_at->format('H:i') : null) }}}">
 
 						<span class="help-block">{{{ $errors->first('lesson_time', ':message') }}}</span>
 
