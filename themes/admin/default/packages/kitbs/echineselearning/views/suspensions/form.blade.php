@@ -61,7 +61,7 @@
 
 								<label for="start_at" class="control-label">{{{ trans('kitbs/echineselearning::suspensions/form.start_at') }}} <i class="fa fa-info-circle" data-toggle="popover" data-content="{{{ trans('kitbs/echineselearning::suspensions/form.start_at_help') }}}"></i></label>
 
-								<input type="date" class="form-control" name="start_at" id="start_at" placeholder="{{{ trans('kitbs/echineselearning::suspensions/form.start_at') }}}" value="{{{ Input::old('start_at', $suspension->start_at->format('Y-m-d')) }}}">
+								<input type="date" class="form-control" name="start_at" id="start_at" placeholder="{{{ trans('kitbs/echineselearning::suspensions/form.start_at') }}}" value="{{{ Input::old('start_at', $suspension->exists ? $suspension->start_at->format('Y-m-d') : null) }}}">
 
 								<span class="help-block">{{{ $errors->first('start_at', ':message') }}}</span>
 
@@ -74,7 +74,7 @@
 
 								<label for="end_at" class="control-label">{{{ trans('kitbs/echineselearning::suspensions/form.end_at') }}} <i class="fa fa-info-circle" data-toggle="popover" data-content="{{{ trans('kitbs/echineselearning::suspensions/form.end_at_help') }}}"></i></label>
 
-								<input type="date" class="form-control" name="end_at" id="end_at" placeholder="{{{ trans('kitbs/echineselearning::suspensions/form.end_at') }}}" value="{{{ Input::old('end_at', $suspension->end_at->format('Y-m-d')) }}}">
+								<input type="date" class="form-control" name="end_at" id="end_at" placeholder="{{{ trans('kitbs/echineselearning::suspensions/form.end_at') }}}" value="{{{ Input::old('end_at', $suspension->exists ? $suspension->end_at->format('Y-m-d') : null) }}}">
 
 								<span class="help-block">{{{ $errors->first('end_at', ':message') }}}</span>
 
@@ -148,10 +148,12 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="control-label">{{{ trans('kitbs/echineselearning::suspensions/form.suspension_when.'.$suspension->is_past) }}}</label>
+									<label class="control-label">{{{ trans('kitbs/echineselearning::suspensions/form.suspension_when.'.($suspension->is_past ?: 'future')) }}}</label>
 									<p class="form-control-static">{{ $suspension->name }} <br>
 									<small class="text-muted">
-										@if ($suspension->is_past == 'past')
+										@if (!$suspension->exists)
+										
+										@elseif ($suspension->is_past == 'past')
 										Ended {{ $suspension->end_when }}
 										@elseif ($suspension->is_past == 'future')
 										Starts {{ $suspension->start_when }}

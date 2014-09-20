@@ -148,7 +148,7 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="control-label">{{{ trans('kitbs/echineselearning::lessons/form.lesson_when.'.$lesson->is_past ) }}}</label>
+									<label class="control-label">{{{ trans('kitbs/echineselearning::lessons/form.lesson_when.'.($lesson->is_past ?: 'future')) }}}</label>
 									<p class="form-control-static">{{ $lesson->name }} <br><small class="text-muted">{{ $lesson->lesson_when }}</small></p>
 								</div>
 							</div>
