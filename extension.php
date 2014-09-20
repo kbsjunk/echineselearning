@@ -81,7 +81,9 @@ return [
 	|
 	*/
 
-	'require' => [],
+	'require' => [
+		'platform/admin'
+	],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -206,6 +208,7 @@ return [
 			{
 				Route::post('echineselearning', 'EmailController@index');
 				Route::get('echineselearning.ics', 'CalendarController@index');
+				Route::get('admin/echineselearning/ical', 'CalendarController@index');
 			});
 		});
 
@@ -356,6 +359,12 @@ return [
 						'name' => 'Suspensions',
 						'class' => 'fa fa-calendar-o',
 						'uri' => 'echineselearning/suspensions',
+					],
+					[
+						'slug' => 'admin-kitbs-echineselearning-ical',
+						'name' => 'iCal Link',
+						'class' => 'fa fa-calendar-o',
+						'uri' => 'echineselearning/ical',
 					],
 				],
 			],
