@@ -1,9 +1,16 @@
 <?php
 
 return [
+	
+	'ical'    => 'iCalendar Preview',
 
 	'tabs' => [
 		'general'    => 'General',
+	],
+
+	'button' => [
+		'back'    => 'Back',
+		'refresh'    => 'Refresh',
 	],
 
 	'fieldsets' => [

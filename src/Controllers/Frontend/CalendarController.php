@@ -78,7 +78,7 @@ class CalendarController extends BaseController {
 
 		});
 
-		//, $this->cached ? 304 : 200
+		// echo $this->cached ? 304 : 200;
 
 		return Response::make($zhongwenkebiao)->header('Content-Type', 'text/plain; charset=utf-8');
 		// ->header('Content-Disposition', 'attachment; filename="chinese.ics"');

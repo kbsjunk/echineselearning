@@ -65,7 +65,7 @@ return [
 	|
 	*/
 
-	'version' => '0.1.3',
+	'version' => '0.1.5',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -204,16 +204,6 @@ return [
 				Route::get('{id}/delete', 'LessonsController@delete');
 			});
 
-			Route::group(['namespace' => 'Frontend'], function()
-			{
-				Route::post('echineselearning', 'EmailController@index');
-				Route::get('echineselearning.ics', 'CalendarController@index');
-				Route::get('admin/echineselearning/ical', 'CalendarController@index');
-			});
-		});
-
-		Route::group(['namespace' => 'Kitbs\EChineseLearning\Controllers'], function()
-		{
 			Route::group(['prefix' => admin_uri().'/echineselearning/suspensions', 'namespace' => 'Admin'], function()
 			{
 				Route::get('/', 'SuspensionsController@index');
@@ -224,6 +214,19 @@ return [
 				Route::get('{id}/edit', 'SuspensionsController@edit');
 				Route::post('{id}/edit', 'SuspensionsController@update');
 				Route::get('{id}/delete', 'SuspensionsController@delete');
+			});
+
+			Route::group(['prefix' => admin_uri().'/echineselearning/preview', 'namespace' => 'Admin'], function()
+			{
+				Route::get('/', 'CalendarController@index');
+				Route::get('refresh', 'CalendarController@refresh');
+
+			});
+
+			Route::group(['namespace' => 'Frontend'], function()
+			{
+				Route::post('echineselearning', 'EmailController@index');
+				Route::get('echineselearning.ics', 'CalendarController@index');
 			});
 
 		});
@@ -362,9 +365,9 @@ return [
 					],
 					[
 						'slug' => 'admin-kitbs-echineselearning-ical',
-						'name' => 'iCal Link',
-						'class' => 'fa fa-calendar-o',
-						'uri' => 'echineselearning/ical',
+						'name' => 'iCalendar Preview',
+						'class' => 'fa fa-file-code-o',
+						'uri' => 'echineselearning/preview',
 					],
 				],
 			],
