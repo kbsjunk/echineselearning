@@ -35,7 +35,7 @@ class CalendarController extends BaseController {
 	public function index()
 	{
 
-		$zhongwenkebiao = Cache::remember('zhongwenkebiao', Carbon::now()->addHours(12), function() {
+		$zhongwenkebiao = Cache::remember('zhongwenkebiao', Carbon::now()->addHours(2), function() {
 
 			$lessons = $this->lesson->createModel()
 			->where('lesson_at', '>=', Carbon::now()->subWeek())

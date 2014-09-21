@@ -111,14 +111,14 @@ class EmailController extends BaseController {
 						$record['enabled'] = false;
 					case 'reserve':
 					case 'update':
-						$messages = $this->lesson->validForCreation($record);
+						$messages = $this->lesson->validForCreation(array_only($record, ['lesson_at']));
 					break;
 
 					case 'suspend':
 						$messages = $this->suspension->validForCreation($record);
 					break;
 				}
-				
+
 				// switch ($this->action) {
 				// 	case 'reserve':
 				// 		$messages = $this->lesson->validForCreation($record);
@@ -149,7 +149,7 @@ class EmailController extends BaseController {
 				}
 				else {
 
-					dd($messages);
+					return Response::make('Error: The record format was invalid.', 404);
 					
 				}
 				
@@ -157,7 +157,7 @@ class EmailController extends BaseController {
 
 		}
 		else {
-			echo 'error2';
+			return Response::make('Error: No dates found in the email.', 404);
 		}
 
 			// Check if the data is valid

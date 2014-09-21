@@ -6,8 +6,8 @@ METHOD:PUBLISH
 @if ($lastDate)
 BEGIN:VEVENT
 UID:{{ md5($lastDate).'@kitbs.com' }}
-DTSTART;VALUE=DATE:{{ $lastDate->setTimezone('UTC')->format('Ymd') }}
-DTEND;VALUE=DATE:{{ $lastDate->setTimezone('UTC')->format('Ymd') }}
+DTSTART;VALUE=DATE:{{ $lastDate->format('Ymd') }}
+DTEND;VALUE=DATE:{{ $lastDate->format('Ymd') }}
 DESCRIPTION:预订期最后一天
 SUMMARY:预订期最后一天
 END:VEVENT
@@ -33,8 +33,8 @@ END:VEVENT
 @foreach ($suspensions as $suspension)
 BEGIN:VEVENT
 UID:{{ $suspension->uid }}
-DTSTART;VALUE=DATE:{{ $suspension->start_at->setTimezone('UTC')->format('Ymd') }}
-DTEND;VALUE=DATE:{{ $suspension->end_at->setTimezone('UTC')->format('Ymd') }}
+DTSTART;VALUE=DATE:{{ $suspension->start_at->format('Ymd') }}
+DTEND;VALUE=DATE:{{ $suspension->end_at->format('Ymd') }}
 DESCRIPTION:{{ $suspension->description }}
 SUMMARY:{{ $suspension->summary }}
 END:VEVENT
