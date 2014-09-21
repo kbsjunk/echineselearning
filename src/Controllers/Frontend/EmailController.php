@@ -75,7 +75,6 @@ class EmailController extends BaseController {
 				return Response::make('error', 404);
 		}
 
-
 		$body = Input::get('body-plain');
 
 		if ( preg_match_all($this->datefinder, $body, $matches, PREG_SET_ORDER) ) {
