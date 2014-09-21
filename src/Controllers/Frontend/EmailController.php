@@ -62,7 +62,7 @@ class EmailController extends BaseController {
 			case 'Notification: Your Scheduled Lessons':
 			case 'Reminder: Your Scheduled Lessons':
 			case 'Notification: Your substitute teacher(s) for your scheduled lesson(s)':
-				$this->datefinder = '|(?<date>20[0-9]{2}-[0-9]{1,2}-[0-9]{1,2})\s*(?<starttime>[0-9]{2}:[0-9]{2}):00\s*\(GMT(?<timezone>\+[0-9]{2}:[0-9]{2})\).+?Skype ID:\s+(?<teacher>[a-z]+)[\._]echineselearning|s';
+				$this->datefinder = '|(?<date>20[0-9]{2}-[0-9]{1,2}-[0-9]{1,2})\s*(?<starttime>[0-9]{2}:[0-9]{2}):00\s*\(GMT(?<timezone>\+[0-9]{2}:[0-9]{2})\).+?Skype ID:\s+(?<teacher>[a-z]+[\.a-z]*[a-z]*)[\._]echineselearning|s';
 				$this->action = 'update';
 			break;
 
