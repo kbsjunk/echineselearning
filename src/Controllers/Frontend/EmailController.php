@@ -107,21 +107,34 @@ class EmailController extends BaseController {
 				}
 
 				switch ($this->action) {
-					case 'reserve':
-						$messages = $this->lesson->validForCreation($record);
-					break;
-
 					case 'cancel':
 						$record['enabled'] = false;
+					case 'reserve':
 					case 'update':
-						$id = $this->lesson->createModel()->where(array_only($record, ['lesson_at']))->first()->id;
-						$messages = $this->lesson->validForUpdate($id, array_only($record, ['lesson_at']));
+						$messages = $this->lesson->validForCreation($record);
 					break;
 
 					case 'suspend':
 						$messages = $this->suspension->validForCreation($record);
 					break;
 				}
+				
+				// switch ($this->action) {
+				// 	case 'reserve':
+				// 		$messages = $this->lesson->validForCreation($record);
+				// 	break;
+
+				// 	case 'cancel':
+				// 		$record['enabled'] = false;
+				// 	case 'update':
+				// 		$id = $this->lesson->createModel()->where(array_only($record, ['lesson_at']))->first()->id;
+				// 		$messages = $this->lesson->validForUpdate($id, array_only($record, ['lesson_at']));
+				// 	break;
+
+				// 	case 'suspend':
+				// 		$messages = $this->suspension->validForCreation($record);
+				// 	break;
+				// }
 
 				if ($messages->isEmpty())
 				{
