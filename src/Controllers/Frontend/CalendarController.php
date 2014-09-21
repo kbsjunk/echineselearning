@@ -73,7 +73,7 @@ class CalendarController extends BaseController {
 
 			$this->cached = false;
 
-			return (string) View::make('kitbs/echineselearning::ics.vcalendar',
+			return (string) View::make('kitbs/echineselearning::ical.vcalendar',
 				compact('lessons', 'suspensions', 'lastDate', 'lastLesson', 'reminder'));
 
 		});

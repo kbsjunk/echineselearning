@@ -49,7 +49,10 @@
 	{{-- Form actions --}}
 	<div class="row">
 
-		<div class="col-lg-12 text-right">
+		<div class="col-lg-7">
+			<a class="btn btn-link" href="{{ URL::to('echineselearning.ics') }}">{{ URL::to('echineselearning.ics') }}</a>
+		</div>
+		<div class="col-lg-5 text-right">
 
 			{{-- Form actions --}}
 			<div class="form-group">
