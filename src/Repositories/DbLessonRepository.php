@@ -6,6 +6,7 @@ use Illuminate\Filesystem\Filesystem;
 use Kitbs\EChineseLearning\Models\Lesson;
 use Symfony\Component\Finder\Finder;
 use Validator;
+use Carbon\Carbon;
 
 class DbLessonRepository implements LessonRepositoryInterface {
 
@@ -100,11 +101,26 @@ class DbLessonRepository implements LessonRepositoryInterface {
 	 */
 	public function create(array $data)
 	{
+		$this->fixLessonAt($data);
 		with($lesson = $this->createModel())->fill($data)->save();
 
 		$this->dispatcher->fire('kitbs.echineselearning.lesson.created', $lesson);
 
 		return $lesson;
+	}
+	
+	public function fixLessonAt(&$data)
+	{
+		$time = new Carbon($data['lesson_time']);
+		$date = new Carbon($data['lesson_date']);
+		
+		$datetime = new Carbon;
+		$datetime->setDate($date->year, $date->month, $date->day)
+			->setTime($time->hour, $time->minute, 0);
+		
+		$data['lesson_at'] = $datetime;
+		unset($data['lesson_date']);
+		unset($data['lesson_time']);
 	}
 
 	/**
@@ -114,6 +130,7 @@ class DbLessonRepository implements LessonRepositoryInterface {
 	{
 		$lesson = $this->find($id);
 
+		$this->fixLessonAt($data);
 		$lesson->fill($data)->save();
 		$lesson->touch();
 
@@ -131,6 +148,7 @@ class DbLessonRepository implements LessonRepositoryInterface {
 		$lesson = $this->createModel()->firstOrCreate($data);
 		$lesson->touch();
 
+		$this->fixLessonAt($data);
 		$this->dispatcher->fire('kitbs.echineselearning.lesson.updated', $lesson);
 
 		return $lesson;
