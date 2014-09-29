@@ -57,7 +57,7 @@ class CalendarController extends BaseController {
 			->orderBy('end_at', 'DESC')
 			->pluck('end_at');
 
-			$lastDate = Carbon::now()->setTime(0,0,0)->addDays(24);
+			$lastDate = Carbon::now()->setTime(0,0,0)->addDays(34);
 
 			$reminder = Carbon::now()->max($lastSuspension)->max($lastLesson)->diff($lastDate)->days;
 
