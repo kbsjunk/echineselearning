@@ -81,18 +81,6 @@ class Lesson extends Entity {
 		if ($this->exists) return $this->lesson_at->format('g:i A');
 	}
 
-	public function setLessonDateAttribute($value)
-	{
-		$date = new Carbon($value);
-		$this->lesson_at->setDate($date->year, $date->month, $date->day);
-	}
-
-	public function setLessonTimeAttribute($value)
-	{
-		$date = new Carbon($value);
-		$this->lesson_at->setTime($date->hour, $date->minute, 0);
-	}
-
 	public function getLessonWhenAttribute()
 	{
 		if ($this->exists) return $this->lesson_at->diffForHumans();
